@@ -16,7 +16,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,metrics
+        include: health
 
 api:
   valid-roles: ${VALID_ROLES}
