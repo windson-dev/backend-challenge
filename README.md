@@ -72,17 +72,13 @@ POST /api/v1/jwt/validate
 #### Token válido
 
 ```json
-{
-  "valid": true
-}
+true
 ```
 
 #### Token inválido
 
 ```json
-{
-  "valid": false
-}
+false
 ```
 
 A API sempre retorna HTTP 200, conforme especificação do desafio.
@@ -97,12 +93,6 @@ Endpoints disponibilizados pelo Spring Boot Actuator:
 
 ```http
 GET /actuator/health
-```
-
-### Métricas
-
-```http
-GET /actuator/metrics
 ```
 
 ---
