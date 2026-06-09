@@ -162,4 +162,4 @@ Por esse motivo, a aplicação valida:
 Windson Macedo
 
 - GitHub: https://github.com/windson-dev
-- LinkedIn: https://www.linkedin.com/in/windson-dev
+- LinkedIn: https://www.linkedin.com/in/windson-donizeti-macedo/
