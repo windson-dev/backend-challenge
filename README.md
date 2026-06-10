@@ -37,6 +37,65 @@ Todas as exceções são tratadas e convertidas em respostas booleanas na camada
 
 ---
 
+## Decisões Técnicas
+
+### Separação de responsabilidades (Parser x Validation x Service)
+
+A solução foi estruturada em três camadas principais:
+
+- **JwtService**: responsável por orquestrar o fluxo de validação e tratar exceções, garantindo que a API sempre retorne um resultado booleano (`true` ou `false`).
+- **JwtParserService**: responsável exclusivamente por interpretar o token JWT, incluindo validação estrutural, decodificação Base64URL e conversão dos claims.
+- **JwtValidationService**: responsável por aplicar as regras de negócio sobre os claims extraídos.
+
+Essa separação garante baixo acoplamento e facilita a manutenção do fluxo.
+
+---
+
+### Tratamento de erros simplificado
+
+Todas as exceções relacionadas à leitura ou parsing do token (`InvalidJwtException`, erros de decode ou JSON inválido) são capturadas na camada de serviço (`JwtService`).
+
+Isso garante que:
+
+- A API nunca expõe stack trace ou erro técnico
+- O retorno da API é sempre um valor booleano
+- O controle de erro fica centralizado na orquestração
+
+---
+
+### Regras de validação explícitas e determinísticas
+
+As validações são realizadas de forma direta, sem frameworks adicionais de regras, seguindo um modelo explícito:
+
+- Validação de estrutura do JWT (3 partes)
+- Validação de claims obrigatórios (`Name`, `Role`, `Seed`)
+- Validação de regras de negócio:
+  - `Name`: não pode conter números e deve ter no máximo 256 caracteres
+  - `Role`: deve ser `Admin`, `Member` ou `External`
+  - `Seed`: deve ser um número válido e primo
+
+---
+
+### Adoção de interfaces (SOLID - DIP / ISP)
+
+Foi adotada a segregação por interfaces em todos os serviços principais, por meio da criação de contratos explícitos para cada responsabilidade.
+
+---
+
+### Testabilidade
+
+A aplicação foi construída visando fácil testabilidade:
+
+- **Testes unitários** para serviços individuais (parser e validação)
+- **Testes de integração** para validar o fluxo completo da API
+- Cobertura dos principais cenários:
+  - token válido
+  - token inválido
+  - erro de parsing
+  - falhas de validação de claims
+ 
+---
+
 ## Executando o Projeto
 
 ### Clonar repositório
