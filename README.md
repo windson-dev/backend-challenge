@@ -23,6 +23,20 @@ Um token é considerado válido quando atende a todas as regras abaixo:
 | Role | Obrigatória e deve ser `Admin`, `Member` ou `External` |
 | Seed | Obrigatória e deve ser um número primo |
 
+---
+
+## Notas de Arquitetura
+
+A solução segue uma abordagem em camadas:
+
+- Camada de serviço responsável pela orquestração do fluxo
+- Parser separado da validação para isolar responsabilidades
+- Regras de negócio concentradas no serviço de validação
+
+Todas as exceções são tratadas e convertidas em respostas booleanas na camada de serviço, garantindo que a API sempre retorne `true` ou `false` como resultado final.
+
+---
+
 ## Executando o Projeto
 
 ### Clonar repositório
