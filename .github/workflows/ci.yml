@@ -24,8 +24,11 @@ jobs:
       - name: Build project
         run: mvn clean compile
 
-      - name: Run tests
+      - name: Run unit tests
         run: mvn test
+
+      - name: Run integration tests
+        run: mvn verify
 
       - name: Build package
         run: mvn clean package -DskipTests
