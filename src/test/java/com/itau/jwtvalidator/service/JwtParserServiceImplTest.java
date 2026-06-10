@@ -3,6 +3,7 @@ package com.itau.jwtvalidator.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itau.jwtvalidator.exception.InvalidJwtException;
+import com.itau.jwtvalidator.service.impl.JwtParserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +19,13 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class JwtParserServiceTest {
+class JwtParserServiceImplTest {
 
     @Mock
     private ObjectMapper objectMapper;
 
     @InjectMocks
-    private JwtParserService jwtParserService;
+    private JwtParserServiceImpl jwtParserServiceImpl;
 
     private static final String VALID_HEADER = "eyJhbGciOiJub25lIn0";
     private static final String VALID_PAYLOAD = "eyJOYW1lIjoiSm9obiIsIlJvbGUiOiJBZG1pbiIsIlNlZWQiOiI3In0";
@@ -34,25 +35,25 @@ class JwtParserServiceTest {
     @Test
     @DisplayName("Should throw InvalidJwtException when token is null")
     void shouldThrowExceptionWhenTokenIsNull() {
-        assertThrows(InvalidJwtException.class, () -> jwtParserService.parse(null));
+        assertThrows(InvalidJwtException.class, () -> jwtParserServiceImpl.parse(null));
     }
 
     @Test
     @DisplayName("Should throw InvalidJwtException when token is blank")
     void shouldThrowExceptionWhenTokenIsBlank() {
-        assertThrows(InvalidJwtException.class, () -> jwtParserService.parse("   "));
+        assertThrows(InvalidJwtException.class, () -> jwtParserServiceImpl.parse("   "));
     }
 
     @Test
     @DisplayName("Should throw InvalidJwtException when token has less than 3 parts")
     void shouldThrowExceptionWhenTokenHasLessThan3Parts() {
-        assertThrows(InvalidJwtException.class, () -> jwtParserService.parse("header.payload"));
+        assertThrows(InvalidJwtException.class, () -> jwtParserServiceImpl.parse("header.payload"));
     }
 
     @Test
     @DisplayName("Should throw InvalidJwtException when token has more than 3 parts")
     void shouldThrowExceptionWhenTokenHasMoreThan3Parts() {
-        assertThrows(InvalidJwtException.class, () -> jwtParserService.parse("header.payload.signature.extra"));
+        assertThrows(InvalidJwtException.class, () -> jwtParserServiceImpl.parse("header.payload.signature.extra"));
     }
 
     @Test
@@ -69,7 +70,7 @@ class JwtParserServiceTest {
                 ArgumentMatchers.<TypeReference<Map<String, Object>>>any()
         )).thenReturn(expectedClaims);
 
-        var jwt = jwtParserService.parse(VALID_TOKEN);
+        var jwt = jwtParserServiceImpl.parse(VALID_TOKEN);
 
         assertNotNull(jwt);
         assertEquals(VALID_TOKEN, jwt.getTokenValue());

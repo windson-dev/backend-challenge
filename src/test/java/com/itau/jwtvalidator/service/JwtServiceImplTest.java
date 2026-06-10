@@ -1,6 +1,9 @@
 package com.itau.jwtvalidator.service;
 
 import com.itau.jwtvalidator.exception.InvalidJwtException;
+import com.itau.jwtvalidator.service.impl.JwtParserServiceImpl;
+import com.itau.jwtvalidator.service.impl.JwtServiceImpl;
+import com.itau.jwtvalidator.service.impl.JwtValidationServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,16 +20,16 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class JwtServiceTest {
+class JwtServiceImplTest {
 
     @Mock
-    private JwtParserService jwtParserService;
+    private JwtParserServiceImpl jwtParserServiceImpl;
 
     @Mock
-    private JwtValidationService validationService;
+    private JwtValidationServiceImpl validationService;
 
     @InjectMocks
-    private JwtService jwtService;
+    private JwtServiceImpl jwtServiceImpl;
 
     private Jwt buildJwt() {
         return Jwt.withTokenValue("token")
@@ -40,18 +43,18 @@ class JwtServiceTest {
     void shouldReturnTrueWhenTokenIsValid() {
         var jwt = buildJwt();
 
-        when(jwtParserService.parse(anyString())).thenReturn(jwt);
+        when(jwtParserServiceImpl.parse(anyString())).thenReturn(jwt);
         when(validationService.validate(jwt)).thenReturn(true);
 
-        assertTrue(jwtService.validate("valid.token.here"));
+        assertTrue(jwtServiceImpl.validate("valid.token.here"));
     }
 
     @Test
     @DisplayName("Should return false when parser throws InvalidJwtException")
     void shouldReturnFalseWhenParserThrowsException() {
-        when(jwtParserService.parse(anyString())).thenThrow(new InvalidJwtException("JWT inválido"));
+        when(jwtParserServiceImpl.parse(anyString())).thenThrow(new InvalidJwtException("JWT inválido"));
 
-        assertFalse(jwtService.validate("invalid-token"));
+        assertFalse(jwtServiceImpl.validate("invalid-token"));
     }
 
     @Test
@@ -59,17 +62,17 @@ class JwtServiceTest {
     void shouldReturnFalseWhenValidationFails() {
         var jwt = buildJwt();
 
-        when(jwtParserService.parse(anyString())).thenReturn(jwt);
+        when(jwtParserServiceImpl.parse(anyString())).thenReturn(jwt);
         when(validationService.validate(jwt)).thenReturn(false);
 
-        assertFalse(jwtService.validate("valid.token.here"));
+        assertFalse(jwtServiceImpl.validate("valid.token.here"));
     }
 
     @Test
     @DisplayName("Should return false when token is null")
     void shouldReturnFalseWhenTokenIsNull() {
-        when(jwtParserService.parse(null)).thenThrow(new InvalidJwtException("JWT inválido"));
+        when(jwtParserServiceImpl.parse(null)).thenThrow(new InvalidJwtException("JWT inválido"));
 
-        assertFalse(jwtService.validate(null));
+        assertFalse(jwtServiceImpl.validate(null));
     }
 }

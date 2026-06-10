@@ -1,5 +1,6 @@
 package com.itau.jwtvalidator.service;
 
+import com.itau.jwtvalidator.service.impl.JwtValidationServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-class JwtValidationServiceTest {
+class JwtValidationServiceImplTest {
 
     @InjectMocks
-    private JwtValidationService validationService;
+    private JwtValidationServiceImpl validationService;
 
     private Jwt buildJwt(Map<String, Object> claims) {
         return Jwt.withTokenValue("token")
