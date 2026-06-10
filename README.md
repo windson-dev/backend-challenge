@@ -31,12 +31,6 @@ Um token é considerado válido quando atende a todas as regras abaixo:
 git clone https://github.com/windson-dev/backend-challenge.git
 ```
 
-### Entrar na pasta
-
-```bash
-cd backend-challenge
-```
-
 ### Executar aplicação
 
 ```bash
