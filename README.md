@@ -95,7 +95,7 @@ GET /actuator/health
 
 > | Collection |
 > |-------------------|
-> | [<img src="https://assets.getpostman.com/common-share/postman-logo.png" alt="Postman Collection" width="50px">]([Uploading Jwt Validator.postman_collection.json…]()
+> | [<img src="https://assets.getpostman.com/common-share/postman-logo.png" alt="Postman Collection" width="50px">](https://github.com/user-attachments/files/28798167/Jwt.Validator.postman_collection.json)
 
 ## Autor
 
