@@ -57,7 +57,7 @@ POST /api/v1/jwt/validate
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJOYW1lIjoiSm9obiIsIlJvbGUiOiJBZG1pbiIsIlNlZWQiOjE3fQ.signature"
+  "token": "token"
 }
 ```
 
