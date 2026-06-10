@@ -91,6 +91,8 @@ GET /actuator/health
 ```
 ---
 
+## Fluxo de validação JWT
+
 <img width="1293" height="2851" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/baa82c34-60c1-44c5-a5c7-1dfa951b69c8" />
 
 
