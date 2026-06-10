@@ -31,12 +31,6 @@ Um token é considerado válido quando atende a todas as regras abaixo:
 git clone https://github.com/windson-dev/backend-challenge.git
 ```
 
-### Entrar na pasta
-
-```bash
-cd backend-challenge
-```
-
 ### Executar aplicação
 
 ```bash
@@ -63,7 +57,7 @@ POST /api/v1/jwt/validate
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJOYW1lIjoiSm9obiIsIlJvbGUiOiJBZG1pbiIsIlNlZWQiOjE3fQ.signature"
+  "token": "token"
 }
 ```
 
@@ -94,67 +88,6 @@ Endpoints disponibilizados pelo Spring Boot Actuator:
 ```http
 GET /actuator/health
 ```
-
----
-
-## Arquitetura
-
-O projeto foi desenvolvido com foco em simplicidade, legibilidade e facilidade de manutenção.
-
-### Responsabilidades
-
-#### JwtParserService
-
-Responsável por:
-
-- Decodificar o token
-- Extrair as claims
-- Converter os dados para DTOs
-
-#### JwtValidationService
-
-Responsável por:
-
-- Validar estrutura do JWT
-- Validar claims obrigatórias
-- Validar Name
-- Validar Role
-- Validar Seed
-
----
-
-## Decisões Técnicas
-
-### Separação Parser x Validation
-
-Foi adotada a separação entre parsing e validação para manter cada componente com uma única responsabilidade.
-
-### Sem padrões desnecessários
-
-Não foram utilizados Strategy, Factory ou Chain of Responsibility por se tratar de um conjunto pequeno e estável de regras de negócio.
-
-Essa abordagem reduz complexidade e facilita a leitura do código.
-
-### Testabilidade
-
-A aplicação possui:
-
-- Testes unitários
-- Testes de integração
-- Cobertura dos principais cenários de validação
-
----
-
-## Limitações
-
-Não é possível validar a assinatura criptográfica do JWT sem acesso à chave utilizada na geração do token.
-
-Por esse motivo, a aplicação valida:
-
-- Estrutura do token
-- Claims presentes
-- Regras de negócio definidas pelo desafio
-
 ---
 
 ## Autor
