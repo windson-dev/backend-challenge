@@ -25,7 +25,7 @@ Um token é considerado válido quando atende a todas as regras abaixo:
 
 ## Executando o Projeto
 
-### Clonar repositório[Jwt Validator.postman_collection.json](https://github.com/user-attachments/files/28797991/Jwt.Validator.postman_collection.json)
+### Clonar repositório
 
 
 ```bash
